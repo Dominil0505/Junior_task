@@ -6,24 +6,29 @@
 
 {{ form_start(form, {'method': 'POST'})  }}
 
-<div class="my-custom-class-for-errors">
+    <div class="my-custom-class-for-errors">
         {{ form_errors(form) }}
     </div>
 
     <div class="form-control">
         <div class="form-label">
-            {{ form_row(form.Name) }}
+            {{ form_label(form.Name) }}
+            {{ form_widget(form.Name) }}
         </div>
+        
         <div class="form-label">
-            {{ form_row(form.Email) }}
+            {{ form_label(form.Email) }}
+            {{ form_widget(form.Email) }}
         </div>
+
         <div class="form-label">
-            {{ form_row(form.Message) }}
+            {{ form_label(form.Message) }}
+            {{ form_widget(form.Message) }}
         </div>
         {{ form_widget(form.send, { 'label': 'Send' }) }}
-
     </div>
-
 {{ form_end(form) }}
+
+
 
 {% endblock %}
