@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}User{% endblock %}
+
+{% block body %}
+
+
+{{ form_start(form, {'method': 'POST'})  }}
+
+<div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="form-control">
+        <div class="form-label">
+            {{ form_row(form.Name) }}
+        </div>
+        <div class="form-label">
+            {{ form_row(form.Email) }}
+        </div>
+        <div class="form-label">
+            {{ form_row(form.Message) }}
+        </div>
+        {{ form_widget(form.send, { 'label': 'Send' }) }}
+
+    </div>
+
+{{ form_end(form) }}
+
+{% endblock %}
