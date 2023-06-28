@@ -34,27 +34,42 @@ class UserController extends AbstractController
         $form = $this->createForm(UserFormType::class, $user);
         $form->handleRequest($request);
 
-        
+        // check if the form is valid
         if($form->isSubmitted() && $form->isValid())
         { 
             $name = $form->get('Name')->getData();
             $email = $form->get('Email')->getData();
             $message = $form->get('Message')->getData();
 
-            $user->setName($name);
-            $user->setEmail($email);
-            $user->setMessage($message);
+            // check if the form is empty
+            if(!empty($name) &&!empty($email) && !empty($message)){
+                $user->setName($name)
+                ->setEmail($email)
+                ->setMessage($message);
 
-            // save data to database
-            $entityManager->persist($user);
-            $entityManager->flush();
+                // save data to database
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            $responseMesagge = "<h1>Köszönjük szépen a kérdésedet. Válaszunkkal hamarosan keresünk a megadott e-mail címen.</h1>";
+                $responseMessage = "Köszönjük szépen a kérdésedet. Válaszunkkal hamarosan keresünk a megadott e-mail címen.";
+
+                return $this->render('user/response.html.twig', [
+                    'responseMessage' => $responseMessage
+                ]); 
+            }
+            else {
+                $responseMessage = 'Hiba! Kérjük töltsd ki az összes mezőt!';
+                return $this->render('user/form.html.twig', [
+                'responseMessage' => $responseMessage,
+                'form' => $form->createView()
+            ]); 
+            }           
         }
         else {
-            $responseMesagge = '<h1 class="warning-message"> Hiba! Kérjük töltsd ki az összes mezőt! </h1>';
+            $responseMessage = 'Hiba! Kérjük töltsd ki az összes mezőt!';
+            return $this->render('user/form.html.twig', [
+                'responseMessage' => $responseMessage
+            ]); 
         }
-    
-        return new Response($responseMesagge);
     }
 }

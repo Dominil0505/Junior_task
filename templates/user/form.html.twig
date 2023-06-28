@@ -11,32 +11,35 @@
 
 <div class="p-2">
     <div class="form-group">
-        {{ form_label(form.Name, 'Neved', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_label(form.Name, 'Neved', {'label_attr': {'class': 'control-label text-white'}}) }}
         <div class="mb-3">
             {{ form_widget(form.Name, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
 
     <div class="form-group">
-        {{ form_label(form.Email, 'E-mail címed', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_label(form.Email, 'E-mail címed', {'label_attr': {'class': 'control-label text-white'}}) }}
         <div class="mb-3">
             {{ form_widget(form.Email, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
 
     <div class="form-group">
-        {{ form_label(form.Message, 'Üzenet szövege', {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_label(form.Message, 'Üzenet szövege', {'label_attr': {'class': 'control-label text-white'}}) }}
         <div class="mb-3">
             {{ form_widget(form.Message, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
-
+    {% if responseMessage is defined %}
+        <h4 class="response"> {{ responseMessage }} </h4>
+    {%  endif  %}
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             {{ form_widget(form.send, {'label': 'Küldés', 'attr': {'class': 'btn btn-primary'}}) }}
         </div>
     </div>
 </div>
+
 {{ form_end(form) }}
 
 
